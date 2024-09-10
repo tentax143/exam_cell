@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Payment Successful</title>
+		<style>
+			body {
+				font-family: "Arial", sans-serif;
+				background-color: #f4f4f4;
+				margin: 0;
+				padding: 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+			}
+
+			.success-container {
+				background-color: #ffffff;
+				padding: 30px;
+				border-radius: 10px;
+				box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+				text-align: center;
+				width: 100%;
+				max-width: 400px;
+			}
+
+			.success-container h1 {
+				font-size: 24px;
+				color: #4caf50;
+				margin-bottom: 20px;
+			}
+
+			.success-container p {
+				font-size: 16px;
+				color: #555;
+				margin-bottom: 20px;
+			}
+
+			.success-icon {
+				font-size: 50px;
+				color: #4caf50;
+				margin-bottom: 20px;
+				animation: bounce 1s ease infinite;
+			}
+
+			@keyframes bounce {
+				0%,
+				100% {
+					transform: translateY(0);
+				}
+				50% {
+					transform: translateY(-10px);
+				}
+			}
+
+			.home-button {
+				background-color: #4caf50;
+				color: white;
+				padding: 12px 20px;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+				font-size: 16px;
+				text-decoration: none;
+				display: inline-block;
+				transition: background-color 0.3s ease;
+				width: 85%;
+				margin-top: 20px;
+			}
+
+			.home-button:hover {
+				background-color: #45a049;
+			}
+
+			.confetti {
+				position: fixed;
+				width: 100%;
+				height: 100%;
+				pointer-events: none;
+				overflow: hidden;
+			}
+
+			.confetti-piece {
+				position: absolute;
+				width: 10px;
+				height: 20px;
+				background-color: #ffcc00;
+				animation: confetti-fall 3s linear infinite;
+			}
+
+			@keyframes confetti-fall {
+				0% {
+					transform: rotateZ(15deg) rotateX(0deg) translateY(0);
+				}
+				100% {
+					transform: rotateZ(15deg) rotateX(720deg) translateY(100vh);
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="success-container">
+			<div class="success-icon">✔</div>
+			<h1>Payment Successful</h1>
+			<p>Your payment has been processed successfully.</p>
+			<a href="{% url 'duplicate_request' %}" class="home-button">Give Request</a>
+
+		</div>
+
+		<div class="confetti" id="confetti"></div>
+
+		<script>
+			function createConfettiPiece() {
+				const confettiPiece = document.createElement("div");
+				confettiPiece.classList.add("confetti-piece");
+				confettiPiece.style.left = Math.random() * 100 + "vw";
+				confettiPiece.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+				confettiPiece.style.animationDuration = Math.random() * 3 + 2 + "s";
+				confettiPiece.style.transform = `rotate(${Math.random() * 360}deg)`;
+				document.getElementById("confetti").appendChild(confettiPiece);
+
+				setTimeout(() => {
+					confettiPiece.remove();
+				}, 5000);
+			}
+
+			setInterval(createConfettiPiece, 100);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Duplicate Certificate Request</title>
+		<style>
+			body,
+			h2,
+			label,
+			p {
+				margin: 0;
+				padding: 0;
+				font-family: Arial, sans-serif;
+			}
+
+			body {
+				background-color: #f5f5f5;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+			}
+
+			.sidebar {
+				position: fixed;
+				top: 0;
+				left: -250px;
+				width: 250px;
+				height: 100%;
+				background-color: #333;
+				padding-top: 60px;
+				transition: 0.3s;
+				z-index: 2;
+			}
+
+			.sidebar a {
+				padding: 15px 20px;
+				text-decoration: none;
+				font-size: 18px;
+				color: white;
+				display: block;
+				transition: 0.3s;
+			}
+
+			.sidebar a:hover {
+				background-color: #575757;
+			}
+
+			.menu-toggle {
+				position: absolute;
+				top: 20px;
+				left: 20px;
+				cursor: pointer;
+				z-index: 3;
+			}
+
+			.menu-toggle .bar {
+				width: 30px;
+				height: 3px;
+				background-color: #333;
+				margin: 5px 0;
+				transition: 0.4s;
+			}
+
+			.overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.5);
+				display: none;
+				z-index: 1;
+			}
+
+			.request-container {
+				background-color: #ffffff;
+				border-radius: 10px;
+				box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+				padding: 20px 40px;
+				width: 400px;
+				text-align: center;
+			}
+
+			h2 {
+				margin-bottom: 20px;
+				color: #007bff;
+			}
+
+			label {
+				display: block;
+				text-align: left;
+				margin-bottom: 5px;
+				color: #333333;
+			}
+
+			input,
+			select {
+				width: 100%;
+				padding: 10px;
+				margin-bottom: 15px;
+				border: 1px solid #dddddd;
+				border-radius: 5px;
+				box-sizing: border-box;
+				font-size: 16px;
+			}
+
+			button {
+				width: 100%;
+				padding: 10px;
+				background-color: #007bff;
+				border: none;
+				border-radius: 5px;
+				color: #ffffff;
+				font-size: 16px;
+				cursor: pointer;
+				transition: background-color 0.3s ease;
+			}
+
+			button:hover {
+				background-color: #0056b3;
+			}
+
+			.confirmation {
+				margin-top: 20px;
+				padding: 10px;
+				background-color: #d4edda;
+				border: 1px solid #c3e6cb;
+				color: #155724;
+				border-radius: 5px;
+				font-size: 16px;
+			}
+
+			.upload-form {
+				width: 100%;
+				max-width: 600px;
+				background: white;
+				padding: 20px;
+				border-radius: 10px;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			}
+
+			.upload-form h2 {
+				margin-bottom: 15px;
+				color: #333;
+			}
+
+			.upload-form label {
+				display: block;
+				margin-bottom: 10px;
+				font-weight: bold;
+			}
+
+			.upload-form input[type="file"] {
+				display: block;
+				width: 100%;
+				margin-bottom: 20px;
+			}
+
+			.upload-form button {
+				display: block;
+				width: 100%;
+				padding: 10px;
+				background-color: blue;
+				color: white;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+
+			.upload-form button:hover {
+				background-color: #218838;
+			}
+
+			.hidden {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="sidebar" id="sidebar">
+			<a href="#">Home</a>
+			<a href="#">Student</a>
+			<a href="#">Controller</a>
+			<a href="#">Contact Us</a>
+		</div>
+
+		<div class="menu-toggle" id="menu-toggle">
+			<div class="bar"></div>
+			<div class="bar"></div>
+			<div class="bar"></div>
+		</div>
+
+		<div class="overlay" id="overlay"></div>
+
+		<div class="request-container">
+			<h2>Duplicate Certificate Request</h2>
+			<form id="requestForm" onsubmit="handleSubmit(event)">
+				<label for="name">Student Name:</label>
+				<input type="text" id="name" name="name" placeholder="Enter your name" required /><br />
+
+				<label for="registernumber">Register Number:</label>
+				<input type="text" id="registernumber" name="registernumber" placeholder="Enter your register number" required /><br />
+
+				<label for="document_type">Document Type:</label>
+				<select id="document_type" name="document_type" required>
+					<option value="Hallticket">Hallticket</option>
+					<option value="ID card">ID card</option>
+					<option value="Both">Both</option></select
+				><br />
+
+				<section class="upload-form">
+					<h2>Upload Payment Screenshot</h2>
+					<form id="payment-form">
+						<label for="payment-screenshot">Choose file:</label>
+						<input type="file" id="payment-screenshot" name="payment-screenshot" accept="image/*" required />
+						<button type="submit">Submit Request</button>
+					</form>
+				</section>
+			</form>
+
+			<div id="confirmationMessage" class="confirmation hidden">
+				<p>Request was sent successfully!</p>
+			</div>
+		</div>
+
+		<script>
+			const menuToggle = document.getElementById("menu-toggle");
+			const sidebar = document.getElementById("sidebar");
+			const overlay = document.getElementById("overlay");
+
+			menuToggle.addEventListener("click", () => {
+				sidebar.style.left = sidebar.style.left === "0px" ? "-250px" : "0px";
+				overlay.style.display = overlay.style.display === "block" ? "none" : "block";
+			});
+
+			overlay.addEventListener("click", () => {
+				sidebar.style.left = "-250px";
+				overlay.style.display = "none";
+			});
+
+			function handleSubmit(event) {
+				event.preventDefault(); // Prevent the default form submission behavior
+
+				const documentType = document.getElementById("document_type").value;
+
+				// Redirect based on the selected document type
+				if (documentType === "Hallticket") {
+					window.location.href = "/students/hallticket_payment/"; // Replace with your actual hallticket page URL
+				} else if (documentType === "ID card") {
+					window.location.href = "/students/idcard_payment/"; // Replace with your actual ID card page URL
+				} else if (documentType === "Both") {
+					window.location.href = "/students/both_payment/"; // Replace with your actual page that handles both documents
+				}
+
+				// Display the confirmation message
+				const confirmationMessage = document.getElementById("confirmationMessage");
+				confirmationMessage.classList.remove("hidden");
+
+				// Optionally, clear the form after submission
+				document.getElementById("requestForm").reset();
+			}
+		</script>
+	</body>
+</html>

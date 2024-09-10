@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+	{% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("{% static 'images/rit.png' %}");
+            background-size: 1500px 800px;
+            color: white;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: rgb(28, 255, 28, 0.986);
+            position: relative;
+            z-index: 1000;
+        }
+
+        .navbar img {
+            height: 70px;
+            margin-right: 0;
+        }
+
+        .navbar .header-info {
+            color: white;
+            text-align: left;
+        }
+
+        .navbar .header-info h1 {
+            margin: 0;
+            font-size: 24px;
+            color: white;
+            text-shadow: black black black;
+            text-align: left;
+        }
+
+        .navbar .header-info h2,
+        .navbar .header-info h3 {
+            margin: 5px 0;
+            font-size: 12px;
+            color: white;
+            text-align: left;
+            text-shadow: 0 0 black;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar ul li {
+            margin-left: 50px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-size: 20px;
+        }
+
+        .navbar ul li a:hover {
+            background-color: white;
+            color: black;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        }
+
+        /* Content styles */
+        .content {
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .content h1 {
+            font-size: 60px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(3, 3, 3, 0.7);
+        }
+
+        .content p {
+            font-size: 24px;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 0 0 5px rgba(8, 8, 8, 0.5);
+        }
+
+        /* Glowing button styles */
+        .glow-button {
+            margin-top: 40px;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            background-color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .glow-button:hover {
+            background-color: rgb(0, 0, 0);
+            color: white;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 1);
+        }
+
+        /* Instructions section */
+        .instructions {
+            background-color: white;
+            padding: 50px 20px;
+            text-align: center;
+            color: black;
+        }
+
+        .instructions h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: bolder;
+        }
+
+        .instructions p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* About Us section */
+        .about-us {
+            background-color: rgba(62, 255, 62, 0.986);
+            padding: 50px 20px;
+            text-align: center;
+            color: black;
+        }
+
+        .about-us h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: bolder;
+            text-shadow: 0 0 rgba(0, 0, 0, 0.719);
+        }
+
+        .about-us p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: bold;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: rgba(62, 255, 62, 0.986);
+            color: black;
+            padding: 40px 20px;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-left,
+        .footer-center,
+        .footer-right {
+            flex: 1;
+            min-width: 250px;
+            margin: 20px;
+        }
+
+        .footer-left h3,
+        .footer-center h3,
+        .footer-right h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .footer-left p,
+        .footer-right p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer-center ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-center ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-center ul li a {
+            color: black;
+            text-align: center;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-center ul li a:hover {
+            color: #aaa;
+        }
+
+        .footer-right i {
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img src="{% static 'images/image.png' %}" alt="Logo" />
+        <div class="header-info">
+            <h1>Ramco Institute of Technology</h1>
+            <h2>Approved by AICTE, New Delhi & Affiliated to Anna University</h2>
+            <h3>NAAC Accredited with 'A+' Grade & ANISO 9001:2015 certified Institution</h3>
+            <h3>NBA Accredited UG Programs: CSE, EEE, ECE and MECH</h3>
+        </div>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'student_login' %}">Student</a></li>
+            <li><a href="{% url 'controller_login' %}">Controller</a></li>
+            <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <h1>Welcome to Our Website</h1>
+        <p>Your journey to success starts here. Explore our resources, connect with us, and achieve your goals.</p>
+        <button class="glow-button">Get Started</button>
+    </div>
+
+    <div class="instructions">
+        <h2>Instructions for Students and Controllers</h2>
+        <p>Welcome to the hall ticket and ID card generation system. Please follow these instructions to proceed:</p>
+        <ul>
+            <li><strong>Students:</strong> Log in to the student portal using your credentials. Navigate to the "Hall Ticket" section to apply for your hall ticket and ID card. Upload the required documents and make sure all information is accurate.</li>
+            <li><strong>Controllers:</strong> Log in to the controller portal to review and approve hall ticket and ID card requests. Ensure that all submitted documents are complete and accurate before processing the requests.</li>
+            <li>For any issues or assistance, please contact the support team via the contact section.</li>
+            <li><strong>Vision:</strong></li>
+            <li>To evolve as an Institute of international repute in offering high-quality technical education, Research and extension programmes in order to create knowledgeable, professionally competent and skilled Engineers and Technologists capable of working in multi-disciplinary environment to cater to the societal needs.</li>
+            <li><strong>Mission</strong></li>
+            <li>To accomplish its unique vision, the Institute has a far-reaching mission that aims:</li>
+            <li>1. To offer higher education in Engineering and Technology with highest level of quality, Professionalism and ethical standards</li>
+            <li>2. To equip the students with up-to-date knowledge in cutting-edge technologies, wisdom, creativity and passion for innovation, and life-long learning skills</li>
+            <li>3. To constantly motivate and involve the students and faculty members in the education process for continuously improving their performance to achieve excellence.</li>
+        </ul>
+    </div>
+
+    <div class="about-us">
+        <h2>About Us</h2>
+        <p>Ramco Institute of Technology is founded with a vision to impart high quality engineering education at an affordable cost. Under the able guidance of our Chairman Shri.P.R.Venketrama Raja, son of Shri P. R. Ramasubrahmaneya Rajha; distinguished professionals, academicians and education experts, we continually aim to revolutionize the learning environment by creating an enviable knowledge pool of engineering and technology graduates who are attuned to the current industry requirements. Being part of the Ramco Group, which is well known for its qualitative and innovative brands not only in India but across the world, we are looked upon to set high standards in the education sector. True to its legacy, RIT has embarked on a mission to empower students with high-quality, accessible yet world-class engineering education and prepare these young minds for lifelong learning by creating and disseminating appropriate knowledge.</p>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <h3>More About Us</h3>
+                <p>We are dedicated to providing the best services and support to our users. Our mission is to empower individuals through our platform.</p>
+                <p>&copy; 2024 Ramco Institute of Technology. All rights reserved.</p>
+            </div>
+            <div class="footer-center">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'student_login' %}">Student</a></li>
+                    <li><a href="{% url 'controller_login' %}">Controller</a></li>
+                    <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-right">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i>Ramco Institute of Technology North Venganallur Village, Rajapalayam – 626 117, Virudhunagar District, Tamil Nadu</p>
+                <p><i class="fas fa-phone"></i> 04563233400</p>
+                <p><i class="fas fa-envelope"></i> rit@rjpm.ac.in</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

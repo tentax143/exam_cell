@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Month Selection</title>
+    <style>
+        /* CSS Styles for the page */
+        body {  
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #f4f6f9, #ebeded); 
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #444;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .submit-btn {
+            background-color:  rgba(8, 8, 107, 0.856);
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: black;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Select the Period</h1>
+        <p>Please select your preferred time period for the exams:</p>
+        <form method="POST" onsubmit="handleLogin(event)">
+            {% csrf_token %}
+            <label for="exam_period">Exam Period:</label>
+				<select id="exa_period" name="exam_period" required>
+					<option value="Nov-Dec">Nov-Dec</option>
+					<option value="Apr-May">Apr-May</option></select><br />
+            <button type="submit" class="submit-btn">Proceed to Payment</button>
+        </form>
+    </div>
+
+    <script>
+        function handleLogin(event) {
+			event.preventDefault(); 
+			window.location.href = "/students/both_payment/";  
+				
+		}
+    </script>
+</body>
+</html>

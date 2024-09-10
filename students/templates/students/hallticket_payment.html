@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hall Ticket Payment</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+</head>
+<body>
+    <div class="menu-toggle" id="menu-toggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <div class="header">
+        <img src="{% static 'images/image.png' %}" alt="College Logo">
+        <h1>Ramco Institute of Technology</h1>
+        <h2>Approved by AICTE, New Delhi & Affiliated to Anna University</h2>
+        <h3>NAAC Accredited with 'A+' Grade & ANISO 9001:2015 certified Institution</h3>
+        <h3>NBA Accredited UG Programs: CSE, EEE, ECE and MECH</h3>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'student_login' %}">Student</a>
+        <a href="{% url 'controller_login' %}">Controller</a>
+        <a href="{% url 'contact_us' %}">Contact Us</a>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <div class="container">
+        <h1>Hall Ticket Payment</h1>
+        <form id="paymentForm" method="post" action="{% url 'process_payment' %}">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="upiId">UPI ID:</label>
+            <input type="text" id="upiId" name="upiId" required>
+
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" value="100" required>
+
+            <div id="qrcode"></div>
+
+            <a href="{% url 'payment_successful' %}">
+                <button type="button">Submit</button>
+            </a>
+        </form>
+    </div>
+
+    <div class="footer">
+        <p>For any assistance or issues related to this issue or to the login process, please contact the student support team.</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.min.js"></script>
+    <script src="{% static 'js/script2.js' %}"></script>
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.style.left = sidebar.style.left === '0px' ? '-250px' : '0px';
+            overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block';
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.style.left = '-250px';
+            overlay.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

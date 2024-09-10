@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Student Login</title>
+		<link rel="stylesheet" href="styles.css" />
+		<script src="script.js" defer></script>
+		<style>
+			/* Reset some default styles */
+			body,
+			h2,
+			h3,
+			label {
+				margin: 0;
+				padding: 0;
+				font-family: Arial, sans-serif;
+			}
+
+			/* Body and Container Styling */
+			body {
+				background-color: #f5f5f5;
+				display: flex;
+				flex-direction: column;
+				min-height: 100vh;
+				overflow-x: hidden;
+			}
+
+			.header {
+				background-color: rgba(8, 8, 107, 0.856);
+				color: white;
+				text-align: center;
+				padding: 20px;
+				position: relative;
+			}
+
+			.header img {
+				height: 60px;
+				vertical-align: middle;
+			}
+
+			.header h1 {
+				margin: 10px 0;
+				font-size: 15px;
+			}
+
+			.header h2,
+			.header h3 {
+				margin: 5px 0;
+			}
+
+			.login-container {
+				background-color: #ffffff;
+				border-radius: 10px;
+				box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+				padding: 20px 40px;
+				width: 400px;
+				text-align: center;
+				margin: 20px auto;
+				z-index: 1;
+			}
+
+			h2 {
+				margin-bottom: 20px;
+				color: black;
+				text-shadow: black;
+			}
+
+			label {
+				display: block;
+				text-align: left;
+				margin-bottom: 5px;
+				color: #333333;
+			}
+
+			input,
+			select {
+				width: 100%;
+				padding: 10px;
+				margin-bottom: 15px;
+				border: 1px solid #dddddd;
+				border-radius: 5px;
+				box-sizing: border-box;
+				font-size: 16px;
+			}
+
+			button {
+				width: 100%;
+				padding: 10px;
+				background-color: rgba(8, 8, 107, 0.856);
+				border: none;
+				border-radius: 5px;
+				color: #ffffff;
+				font-size: 16px;
+				cursor: pointer;
+				transition: background-color 0.3s ease;
+			}
+
+			button:hover {
+				background-color: rgba(8, 8, 107, 0.856);
+			}
+
+			/* Sidebar Styling */
+			.sidebar {
+				position: fixed;
+				top: 0;
+				left: -250px;
+				width: 250px;
+				height: 100%;
+				background-color: #333;
+				padding-top: 60px;
+				transition: 0.3s;
+				z-index: 2;
+			}
+
+			.sidebar a {
+				padding: 15px 20px;
+				text-decoration: none;
+				font-size: 18px;
+				color: white;
+				display: block;
+				transition: 0.3s;
+			}
+
+			.sidebar a:hover {
+				background-color: #575757;
+			}
+
+			.menu-toggle {
+				position: absolute;
+				top: 20px;
+				left: 20px;
+				cursor: pointer;
+				z-index: 3;
+			}
+
+			.menu-toggle .bar {
+				width: 30px;
+				height: 3px;
+				background-color: #333;
+				margin: 5px 0;
+				transition: 0.4s;
+			}
+
+			/* Overlay to close sidebar */
+			.overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.5);
+				display: none;
+				z-index: 1;
+			}
+
+			/* Footer Styling */
+			.footer {
+				background-color: rgba(8, 8, 107, 0.856);
+				color: white;
+				text-align: center;
+				padding: 15px;
+				margin-top: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Header -->
+		<div class="header">
+			<img src="image.png" alt="College Logo" />
+			<!-- Add your logo image here -->
+			<h1>Ramco Institute of Technology</h1>
+			<h2>Approved by AICTE, New Delhi & Affiliated to Anna University</h2>
+			<h3>NAAC Accredited with 'A+' Grade & ANISO 9001:2015 certified Institution</h3>
+			<h3>NBA Accredited UG Programs: CSE, EEE, ECE and MECH</h3>
+		</div>
+
+		<!-- Sidebar -->
+		<div class="sidebar" id="sidebar">
+			<a href="#">Home</a>
+			<a href="#">Student</a>
+			<a href="#">Controller</a>
+			<a href="#">Contact Us</a>
+		</div>
+
+		<!-- Hamburger Menu -->
+		<div class="menu-toggle" id="menu-toggle">
+			<div class="bar"></div>
+			<div class="bar"></div>
+			<div class="bar"></div>
+		</div>
+
+		<!-- Overlay -->
+		<div class="overlay" id="overlay"></div>
+
+		<!-- Login Container -->
+		<div class="login-container">
+			<h2>Student Login</h2>
+			<form id="loginForm" onsubmit="handleLogin(event)">
+				<label for="username">Username:</label>
+				<input type="text" id="username" name="username" placeholder="Enter your username" required /><br />
+
+				<label for="regno">Register Number:</label>
+				<input type="text" id="regno" name="regno" placeholder="Enter your register number" required /><br />
+
+				<label for="email-id">Email ID:</label>
+				<input type="text" id="email-id" name="email-id" placeholder="Enter your email id" required /><br />
+
+				<label for="inst_name">Institute Name:</label>
+				<input type="text" id="inst_name" name="inst_name" placeholder="Enter your Institute Name" required /><br />
+
+				<label for="exam_period">Exam Period:</label>
+				<select id="exam_period" name="exam_period" required>
+					<option value="nov-dec">Nov-Dec</option>
+					<option value="apr-may">Apr-May</option></select
+				><br />
+
+				<label for="document_type">Document Type:</label>
+				<select id="document_type" name="document_type" required>
+					<option value="Hallticket">Hallticket</option>
+					<option value="IDcard">ID Card</option>
+					<option value="Both">Both</option></select
+				><br />
+
+				<button type="submit">Submit</button>
+			</form>
+		</div>
+
+		<!-- Footer -->
+		<div class="footer">
+			<p>For any assistance or issues related to the login process, please contact the student support team.</p>
+		</div>
+
+		<!-- JavaScript for Sidebar Toggle -->
+		<script>
+			const menuToggle = document.getElementById("menu-toggle");
+			const sidebar = document.getElementById("sidebar");
+			const overlay = document.getElementById("overlay");
+
+			menuToggle.addEventListener("click", () => {
+				sidebar.style.left = sidebar.style.left === "0px" ? "-250px" : "0px";
+				overlay.style.display = overlay.style.display === "block" ? "none" : "block";
+			});
+
+			overlay.addEventListener("click", () => {
+				sidebar.style.left = "-250px";
+				overlay.style.display = "none";
+			});
+
+			function handleLogin(event) {
+				event.preventDefault(); // Prevent the default form submission behavior
+
+				// Get the selected document type
+				const documentType = document.getElementById("document_type").value;
+
+				// Redirect based on the document type
+				if (documentType === "Hallticket") {
+					window.location.href = "/students/hallticket_payment/"; // Replace with your actual hallticket page URL
+				} else if (documentType === "IDcard") {
+					window.location.href = "/students/idcard_payment/"; // Replace with your actual ID card page URL
+				} else if (documentType === "Both") {
+					window.location.href = "/students/both_template"; // Replace with your actual page that handles both documents
+				}
+			}
+		</script>
+	</body>
+</html>

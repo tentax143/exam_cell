@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Request Information</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+    .header {
+    background-color: #003366;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+    .info-container {
+    margin: 50px auto;
+    width: 50%;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+    .info-container h2 {
+    margin-top: 0;
+}
+
+    .info-container p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+    .footer {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Student Request Information</h1>
+    </div>
+
+    <div class="info-container">
+        <h2>Request Details</h2>
+        <p><strong>Username:</strong> <span id="username"></span></p>
+        <p><strong>Register No:</strong> <span id="registerNo"></span></p>
+        <p><strong>Document Type:</strong> <span id="documentType"></span></p>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Ramco Institute of Technology. All rights reserved.</p>
+    </div>
+
+    <script>
+        // Mock data representing the student's information who already gave a request
+const studentRequestInfo = {
+    username: 'John Doe',
+    registerNo: '123456',
+    documentType: 'Hall Ticket'
+};
+
+// Function to populate the page with the student's information
+function populateStudentInfo() {
+    document.getElementById('username').textContent = studentRequestInfo.username;
+    document.getElementById('registerNo').textContent = studentRequestInfo.registerNo;
+    document.getElementById('documentType').textContent = studentRequestInfo.documentType;
+}
+
+// Call the function to populate the data when the page loads
+window.onload = populateStudentInfo;
+
+    </script>
+</body>
+</html>

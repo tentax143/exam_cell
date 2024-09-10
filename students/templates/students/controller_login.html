@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Controller Login</title>
+	{% load static %}
+    <link rel="stylesheet" href="{% static 'css/style3.css' %}" />
+</head>
+<body>
+    <div class="header">
+        <img src="{% static 'images/image.png' %}" alt="College Logo" />
+        <h1>Ramco Institute of Technology</h1>
+        <h2>Approved by AICTE, New Delhi & Affiliated to Anna University</h2>
+        <h3>NAAC Accredited with 'A+' Grade & ANISO 9001:2015 certified Institution</h3>
+        <h3>NBA Accredited UG Programs: CSE, EEE, ECE and MECH</h3>
+    </div>
+
+    <div class="toggle-menu" onclick="toggleSidebar()">&#9776;</div>
+
+    <div class="sidebar" id="sidebar">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'student_login' %}">Student</a>
+        <a href="{% url 'controller_login' %}">Controller</a>
+        <a href="{% url 'contact_us' %}">Contact Us</a>
+    </div>
+
+    <div class="login-container">
+        <h2>Controller Login</h2>
+        <form action="{% url 'view_requests' %}" method="post">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required />
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required />
+
+            <label for="role">Role:</label>
+            <select id="role" name="role" required>
+                <option value="principal">Principal</option>
+                <option value="HOD">HOD</option>
+                <option value="Examcell">Examcell</option>
+                <option value="staff">Staff</option>
+                <option value="others">Others</option>
+            </select>
+
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="{% url 'controller_signup' %}">Sign up here</a></p>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Ramco Institute of Technology. All rights reserved.</p>
+    </div>
+
+    <script src="{% static 'js/script3.js' %}"></script>
+</body>
+</html>

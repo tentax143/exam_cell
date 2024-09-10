@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Hall Ticket</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				background-color: #f9f9f9;
+				margin: 0;
+				padding: 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+			}
+			.hallticket-container {
+				background-color: white;
+				padding: 20px 40px;
+				border-radius: 10px;
+				box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+				width: 600px;
+				text-align: center;
+			}
+			.institute-name {
+				font-size: 24px;
+				font-weight: bold;
+				margin-bottom: 10px;
+			}
+			.hallticket-title {
+				font-size: 22px;
+				font-weight: bold;
+				margin-bottom: 30px;
+				border-bottom: 2px solid #007bff;
+				padding-bottom: 10px;
+			}
+			.details {
+				text-align: left;
+				margin: 20px 0;
+			}
+			.details p {
+				margin: 10px 0;
+				font-size: 18px;
+			}
+			.details span {
+				font-weight: bold;
+			}
+			.generate-pdf {
+				margin-top: 20px;
+				padding: 10px 20px;
+				background-color: #007bff;
+				color: white;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+			.generate-pdf:hover {
+				background-color: #0056b3;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="hallticket-container" id="hallticket">
+			<div class="institute-name">[Institute Name]</div>
+			<div class="hallticket-title">Hall Ticket</div>
+			<div class="details">
+				<p><span>Name:</span> <span id="studentName"></span></p>
+				<p><span>Register Number:</span> <span id="registerNumber"></span></p>
+				<p><span>Email ID:</span> <span id="email"></span></p>
+				<p><span>Exam Period:</span> <span id="examPeriod"></span></p>
+				<p><span>Timings:</span> 9.30-12.30 A.M.</p>
+			</div>
+			<button class="generate-pdf" onclick="generatePDF()">Download PDF</button>
+		</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+		<script>
+			// Sample Data (This would normally come from /students/student_login/ or a form)
+			const studentData = {
+				name: "John Doe",
+				registerNumber: "12345678",
+				email: "john.doe@example.com",
+				examPeriod: "August 2024",
+			};
+
+			// Populate the hall ticket with student data
+			document.getElementById("studentName").innerText = studentData.name;
+			document.getElementById("registerNumber").innerText = studentData.registerNumber;
+			document.getElementById("email").innerText = studentData.email;
+			document.getElementById("examPeriod").innerText = studentData.examPeriod;
+
+			// Function to generate PDF
+			function generatePDF() {
+				const { jsPDF } = window.jspdf;
+				const doc = new jsPDF();
+
+				doc.setFontSize(20);
+				doc.text("[Institute Name]", 105, 20, null, null, "center");
+				doc.setFontSize(18);
+				doc.text("Hall Ticket", 105, 30, null, null, "center");
+				doc.line(20, 35, 190, 35);
+
+				doc.setFontSize(16);
+				doc.text(`Name: ${studentData.name}`, 20, 50);
+				doc.text(`Register Number: ${studentData.registerNumber}`, 20, 60);
+				doc.text(`Email ID: ${studentData.email}`, 20, 70);
+				doc.text(`Exam Period: ${studentData.examPeriod}`, 20, 80);
+				doc.text("Timings: 9.30-12.30 A.M.", 20, 90);
+
+				doc.save("Hall_Ticket.pdf");
+			}
+		</script>
+	</body>
+</html>

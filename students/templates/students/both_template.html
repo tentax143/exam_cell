@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Preview Page</title>
+		<style>
+			/* General Reset and Styling */
+			body {
+				font-family: Arial, sans-serif;
+				margin: 0;
+				padding: 0;
+				background-color: #f4f4f4;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			/* Sidebar Styling */
+			.sidebar {
+				position: fixed;
+				top: 0;
+				left: -250px;
+				width: 250px;
+				height: 100%;
+				background-color: #333;
+				padding-top: 60px;
+				transition: 0.3s;
+				z-index: 2;
+			}
+
+			.sidebar a {
+				padding: 15px 20px;
+				text-decoration: none;
+				font-size: 18px;
+				color: white;
+				display: block;
+				transition: 0.3s;
+			}
+
+			.sidebar a:hover {
+				background-color: #575757;
+			}
+
+			/* Menu Toggle (Hamburger Icon) Styling */
+			.menu-toggle {
+				position: absolute;
+				top: 20px;
+				left: 20px;
+				cursor: pointer;
+				z-index: 3;
+			}
+
+			.menu-toggle .bar {
+				width: 30px;
+				height: 3px;
+				background-color: #333;
+				margin: 5px 0;
+				transition: 0.4s;
+			}
+
+			/* Overlay to close sidebar */
+			.overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.5);
+				display: none;
+				z-index: 1;
+			}
+
+			/* Header Styling */
+			.header {
+				background-color: rgb(12, 12, 143);
+				color: white;
+				text-align: center;
+				padding: 20px 0;
+				width: 100%;
+				margin-bottom: 20px;
+				position: relative;
+			}
+
+			.header img {
+				height: 80px;
+				margin-bottom: 10px;
+			}
+
+			.header h1 {
+				margin: 10px 0;
+				font-size: 24px;
+			}
+
+			.header h2,
+			.header h3 {
+				margin: 5px 0;
+				font-size: 18px;
+			}
+
+			/* Main Content Styling */
+			.content {
+				text-align: center;
+				margin-top: 50px;
+			}
+
+			.content button {
+				padding: 15px 30px;
+				font-size: 18px;
+				margin: 20px;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+				transition: background-color 0.3s ease;
+			}
+
+			.content .hallticket-btn {
+				background-color: rgb(12, 12, 143);
+				color: white;
+			}
+
+			.content .hallticket-btn:hover {
+				background-color: rgb(12, 12, 143);
+			}
+
+			.content .idcard-btn {
+				background-color: rgb(12, 12, 143);
+				color: white;
+			}
+
+			.content .idcard-btn:hover {
+				background-color: rgb(12, 12, 143);
+			}
+			.footer {
+				background-color: rgba(8, 8, 107, 0.856);
+				color: white;
+				text-align: center;
+				padding: 15px;
+				margin-top: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Sidebar -->
+		<div class="sidebar" id="sidebar">
+			<a href="#">Home</a>
+			<a href="#">Student</a>
+			<a href="#">Controller</a>
+			<a href="#">Contact Us</a>
+		</div>
+
+		<!-- Menu Toggle -->
+		<div class="menu-toggle" id="menu-toggle">
+			<div class="bar"></div>
+			<div class="bar"></div>
+			<div class="bar"></div>
+		</div>
+
+		<!-- Overlay -->
+		<div class="overlay" id="overlay"></div>
+
+		<!-- Header -->
+		<div class="header">
+			<img src="image.png" alt="College Logo" />
+			<!-- Replace with your logo image -->
+			<h1>Ramco Institute of Technology</h1>
+			<h2>Approved by AICTE, New Delhi & Affiliated to Anna University</h2>
+			<h3>NAAC Accredited with 'A+' Grade & ANISO 9001:2015 certified Institution</h3>
+			<h3>NBA Accredited UG Programs: CSE, EEE, ECE and MECH</h3>
+		</div>
+
+		<!-- Main Content -->
+		<div class="content">
+			<button class="hallticket-btn" onclick="redirectToPage('/students/hallticket_template/')">Hallticket Preview</button>
+			<button class="idcard-btn" onclick="redirectToPage('/students/idcard_template/')">ID Card Preview</button>
+		</div>
+		<div class="footer">
+			<p>For any assistance or issues related to the login process, please contact the student support team.</p>
+		</div>
+
+		<script>
+			const menuToggle = document.getElementById("menu-toggle");
+			const sidebar = document.getElementById("sidebar");
+			const overlay = document.getElementById("overlay");
+
+			menuToggle.addEventListener("click", () => {
+				sidebar.style.left = sidebar.style.left === "0px" ? "-250px" : "0px";
+				overlay.style.display = overlay.style.display === "block" ? "none" : "block";
+			});
+
+			overlay.addEventListener("click", () => {
+				sidebar.style.left = "-250px";
+				overlay.style.display = "none";
+			});
+
+			function redirectToPage(page) {
+				window.location.href = page;
+			}
+		</script>
+	</body>
+</html>
