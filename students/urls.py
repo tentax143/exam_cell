@@ -16,4 +16,5 @@ urlpatterns = [
     path('idcard_template/', views.idcard_template, name='idcard_template'),
     path('both_template/', views.both_template, name='both_template'),
     path('contact_us/', views.contact_us, name='contact_us'),
+    path('signup/', views.student_signup, name='student_signup'),
 ]
