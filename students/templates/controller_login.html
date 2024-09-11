@@ -189,7 +189,7 @@
 
     <div class="login-container">
         <h2>Controller Login</h2>
-        <form action="{% url 'controller_login' %}" method="post">
+        <form method="POST" action="{% url 'controller_login' %}">
 
             {% csrf_token %}
             <label for="username">Username:</label>

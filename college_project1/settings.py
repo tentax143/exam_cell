@@ -56,11 +56,12 @@ ROOT_URLCONF = 'college_project1.urls'
 
 # In your view
 # In settings.py
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # Points to the global templates directory
-        'APP_DIRS': True,  # Allows app-specific templates directories
+        'DIRS': [os.path.join(BASE_DIR, 'students', 'templates')],  # Ensure the path is correct
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
